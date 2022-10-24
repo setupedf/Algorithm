@@ -1,50 +1,55 @@
 //	Developing and learning of algorithms
+#ifndef IOSTREAM
+#define IOSTREAM
+
 #include <iostream>
+
+#endif
+
 #include "Algorithm.h"
 //#define DEBUG_MODE
 
 //	===========================================Tasks===========================================
 /*
 -	Develop reverse sort
--	
 */
 
 //	===========================================Algorithms===========================================
 
 //	Returns the greatest common divisor of two numbers a and b
-int Gcd(int a, int b) 
+int Gcd(int a, int b)
 {
 	int remainder = 0;
 
-	if (a == 0) 
+	if (a == 0)
 	{
 		return b;
 	}
-	else if (b == 0) 
+	else if (b == 0)
 	{
 		return a;
 	}
 
-	if (a > b) 
+	if (a > b)
 	{
 		remainder = a % b;
 		return Gcd(remainder, b);
 	}
-	else if (a < b) 
+	else if (a < b)
 	{
 		remainder = b % a;
 		return Gcd(remainder, a);
 	}
-	else 
+	else
 	{
 		return a;
 	}
 }
 
 //	Modifies passed array with Merge Sort
-int MergeSort(int arr[], const int size) 
+int MergeSort(int arr[], const int size)
 {
-	if (size > 1) 
+	if (size > 1)
 	{
 		int halfASize = size / 2;
 		int remainder = size % 2;
@@ -160,20 +165,20 @@ void DivideArray(int arr[], const int size, int arr1[], int size1, int arr2[], i
 }
 
 //	Prints the array
-void PrintArray(const int arr[], const int size) 
+void PrintArray(const int arr[], const int size)
 {
-	for (int i = 0; i < size; i++) 
+	for (int i = 0; i < size; i++)
 	{
 		std::cout << "\t" << arr[i];
 	}
-	
+
 	std::cout << std::endl;
 }
 
 //	Fills the array with pseudo-random values, [0, 10] range
-void RandFillArray(int arr[], const int size) 
+void RandFillArray(int arr[], const int size)
 {
-	for (int i = 0; i < size; i++) 
+	for (int i = 0; i < size; i++)
 	{
 		arr[i] = rand() % 10;
 	}
