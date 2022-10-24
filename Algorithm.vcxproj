@@ -131,7 +131,7 @@
     <ClCompile Include="..\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Algorithm.exe" />
+    <ClInclude Include="Algorithm.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
