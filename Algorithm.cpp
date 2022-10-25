@@ -9,11 +9,6 @@
 #include "Algorithm.h"
 //#define DEBUG_MODE
 
-//	===========================================Tasks===========================================
-/*
--	Develop reverse sort
-*/
-
 //	===========================================Algorithms===========================================
 
 //	Returns the greatest common divisor of two numbers a and b
@@ -47,7 +42,7 @@ int Gcd(int a, int b)
 }
 
 //	Modifies passed array with Merge Sort
-int MergeSort(int arr[], const int size)
+void DoMergeSort(int arr[], const int size)
 {
 	if (size > 1)
 	{
@@ -67,12 +62,12 @@ int MergeSort(int arr[], const int size)
 
 			delete[] arr1;
 			delete[] arr2;
-			return 0;
+			return;
 		}
 		else
 		{
-			MergeSort(arr1, size1);
-			MergeSort(arr2, size2);
+			DoMergeSort(arr1, size1);
+			DoMergeSort(arr2, size2);
 		}
 
 		MergeSortedArrays(arr, arr1, size1, arr2, size2);
@@ -80,6 +75,29 @@ int MergeSort(int arr[], const int size)
 		delete[] arr1;
 		delete[] arr2;
 	}
+}
+
+//	Modifies passed array with Quick Sort
+void QuickSort(int arr[], const int size)
+{
+	int current = arr[0];
+	int wall = 0;
+
+	for (int i = 1; i < size; i++)
+	{
+		if (current > arr[i]) 
+		{
+			int reserved = arr[i];
+
+			//	Switching items
+			
+		}
+		else 
+		{
+			//	Go next
+		}
+	}
+	
 }
 
 //	===========================================Utilities===========================================
@@ -183,4 +201,3 @@ void RandFillArray(int arr[], const int size)
 		arr[i] = rand() % 10;
 	}
 }
-
