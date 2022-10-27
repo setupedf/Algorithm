@@ -80,24 +80,46 @@ void DoMergeSort(int arr[], const int size)
 //	Modifies passed array with Quick Sort
 void QuickSort(int arr[], const int size)
 {
-	int current = arr[0];
-	int wall = 0;
-
-	for (int i = 1; i < size; i++)
+	if (size == 1) 
 	{
-		if (current > arr[i]) 
-		{
-			int reserved = arr[i];
-
-			//	Switching items
-			
-		}
-		else 
-		{
-			//	Go next
-		}
+		return;
 	}
-	
+	else if (size >= 2) 
+	{
+		int greater = 0, less = 0, equal = 0;
+		int &greaterRef = greater;
+		int& lessRef = less;
+		int& equalRef = equal;
+
+		CountGEL(arr, size, greaterRef, less, equal);
+
+		int* arr1 = new int[less];
+		int* arr2 = new int[equal];
+		int* arr3 = new int[greater];
+
+		SortElements(arr, size, arr1, arr2, arr3);
+
+#ifdef DEBUG_MODE 
+
+		std::cout << "Less Part of the Array: ";
+		PrintArray(arr1, less);
+
+		std::cout << "Equal Part of the Array: ";
+		PrintArray(arr2, equal);
+
+		std::cout << "Greater Part of the Array: ";
+		PrintArray(arr3, greater);
+#endif
+
+		QuickSort(arr1, less);
+		QuickSort(arr3, greater);
+
+		MergeQuickSorted(arr, arr1, less, arr2, equal, arr3, greater);
+
+		delete[] arr1;
+		delete[] arr2;
+		delete[] arr3;
+	}
 }
 
 //	===========================================Utilities===========================================
@@ -151,6 +173,29 @@ void MergeSortedArrays(int arrRes[], int arr1[], const int size1, int arr2[], co
 #endif
 }
 
+//	Merges three sorted arrays in new one
+void MergeQuickSorted(int arrRes[], int less[], const int size1, int equal[], const int size2, int greater[], const int size3)
+{
+	int size = size1 + size2 + size3;
+
+	int i = 0, k = 0, j = 0, l = 0;
+	while (i < size) 
+	{
+		if (k < size1) 
+		{
+			arrRes[i++] = less[k++];
+		}
+		else if (j < size2) 
+		{
+			arrRes[i++] = equal[j++];
+		}
+		else if (l < size3) 
+		{
+			arrRes[i++] = greater[l++];
+		}
+	}
+}
+
 //	Devides the passed array into arr1 and arr2
 void DivideArray(int arr[], const int size, int arr1[], int size1, int arr2[], int size2)
 {
@@ -182,6 +227,42 @@ void DivideArray(int arr[], const int size, int arr1[], int size1, int arr2[], i
 #endif
 }
 
+//	Sorts array with two elements
+void SortArray(int arr[]) 
+{
+	int reserved = 0;
+	if (arr[0] > arr[1]) 
+	{
+		reserved = arr[1];
+
+		arr[1] = arr[0];
+		arr[0] = reserved;
+	}
+}
+
+//	Sorts the elements of array into less, equal and greater then pivot parts
+void SortElements(int arr[], const int size, int less[], int equal[], int greater[]) 
+{
+	int pivot = arr[0];
+	int j = 0, k = 0, l = 0;
+
+	for (int i = 0; i < size; i++) 
+	{
+		if (pivot > arr[i]) 
+		{
+			less[j++] = arr[i];
+		}
+		else if (pivot < arr[i]) 
+		{
+			greater[k++] = arr[i];
+		}
+		else 
+		{
+			equal[l++] = arr[i];
+		}
+	}
+}
+
 //	Prints the array
 void PrintArray(const int arr[], const int size)
 {
@@ -201,3 +282,25 @@ void RandFillArray(int arr[], const int size)
 		arr[i] = rand() % 10;
 	}
 }
+
+//	Counts all elements that are Greater, Equal to or Less then the first element
+void CountGEL(int arr[], const int size, int& cgreater, int& cless, int& cequal) 
+{
+	for (int i = 0; i < size; i++) 
+	{
+		//	the pivot is arr[0]
+		if (arr[0] < arr[i]) 
+		{
+			cgreater++;
+		}
+		else if (arr[0] > arr[i])
+		{
+			cless++;
+		}
+		else
+		{
+			cequal++;
+		}
+	}
+}
+
