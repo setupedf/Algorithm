@@ -11,5 +11,8 @@ void QuickSort(int arr[], const int size);
 void CountGEL(int arr[], const int size, int& cgreater, int& cless, int& cequal);
 void SortElements(int arr[], const int size, int less[], int equal[], int greater[]);
 void MergeQuickSorted(int arrRes[], int less[], const int size1, int equal[], const int size2, int greater[], const int size3);
+void BuildMaxHeap(int arr[], int heap[], int size);
+bool CheckIfEven(int a);
+void CompareWithFolks(int heap[], int i);
 
 #endif
