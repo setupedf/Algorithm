@@ -8,7 +8,6 @@ void DivideArray(int arr[], const int size, int arr1[], int size1, int arr2[], i
 void MergeSortedArrays(int arrRes[], int arr1[], const int size1, int arr2[], const int size2);
 void DoMergeSort(int arr[], const int size);
 void QuickSort(int arr[], const int size);
-void SortArray(int arr[]);
 void CountGEL(int arr[], const int size, int& cgreater, int& cless, int& cequal);
 void SortElements(int arr[], const int size, int less[], int equal[], int greater[]);
 void MergeQuickSorted(int arrRes[], int less[], const int size1, int equal[], const int size2, int greater[], const int size3);

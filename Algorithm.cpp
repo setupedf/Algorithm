@@ -227,19 +227,6 @@ void DivideArray(int arr[], const int size, int arr1[], int size1, int arr2[], i
 #endif
 }
 
-//	Sorts array with two elements
-void SortArray(int arr[]) 
-{
-	int reserved = 0;
-	if (arr[0] > arr[1]) 
-	{
-		reserved = arr[1];
-
-		arr[1] = arr[0];
-		arr[0] = reserved;
-	}
-}
-
 //	Sorts the elements of array into less, equal and greater then pivot parts
 void SortElements(int arr[], const int size, int less[], int equal[], int greater[]) 
 {
