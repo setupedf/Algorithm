@@ -1,10 +1,4 @@
 //	Developing and learning of algorithms
-#ifndef IOSTREAM
-#define IOSTREAM
-
-#include <iostream>
-
-#endif
 
 #include "Algorithm.h"
 //#define DEBUG_MODE
@@ -101,13 +95,13 @@ void QuickSort(int arr[], const int size)
 
 #ifdef DEBUG_MODE 
 
-		std::cout << "Less Part of the Array: ";
+		cout << "Less Part of the Array: ";
 		PrintArray(arr1, less);
 
-		std::cout << "Equal Part of the Array: ";
+		cout << "Equal Part of the Array: ";
 		PrintArray(arr2, equal);
 
-		std::cout << "Greater Part of the Array: ";
+		cout << "Greater Part of the Array: ";
 		PrintArray(arr3, greater);
 #endif
 
@@ -122,7 +116,57 @@ void QuickSort(int arr[], const int size)
 	}
 }
 
+//	Returns the shortest distance from A to B
+int Dijkstra(map<string, vector<string>> graph, map<string, map<string, int>> dists, string start, string end, bool printRoute = false)
+{
+	map<string, int> costs;
+	int cheapest;
+	string route;
+
+	//	Iterates over vector of nodes and stores each other the distance
+	for (int i = 0; i < graph[start].size(); i++)
+	{
+		//	costs[neigbour] = dists[start][neigbour]
+		costs[graph[start][i]] = dists[start][graph[start][i]];
+	}
+
+	if (graph[start].size() == 0) 
+	{
+		return 0;
+	}
+
+	route = FindCheapest(graph, costs, start);
+
+	if (printRoute == true) 
+	{
+		cout << route << '\n';
+	}
+
+	cheapest = costs[route];
+
+	return cheapest + Dijkstra(graph, dists, route, end, printRoute);
+}
+
+
 //	===========================================Utilities===========================================
+
+//	Returns the cheapest way
+string FindCheapest(map<string, vector<string>> graph, map<string, int> costs, string node)
+{
+	string cheapest = graph[node][0];
+	int min_cost = costs[graph[node][0]];
+
+	for (int i = 0; i < graph[node].size(); i++)
+	{
+		if (costs[graph[node][i]] < min_cost) 
+		{
+			cheapest = graph[node][i];
+		}
+	}
+
+	return cheapest;
+
+}
 
 //	Merges two sorted arrays in new one
 void MergeSortedArrays(int arrRes[], int arr1[], const int size1, int arr2[], const int size2)
@@ -159,17 +203,17 @@ void MergeSortedArrays(int arrRes[], int arr1[], const int size1, int arr2[], co
 	}
 
 #ifdef DEBUG_MODE:
-	std::cout << "First Array: ";
+	cout << "First Array: ";
 	PrintArray(arr1, size1);
-	std::cout << std::endl;
+	cout << endl;
 
-	std::cout << "Second Array: ";
+	cout << "Second Array: ";
 	PrintArray(arr2, size2);
-	std::cout << std::endl;
+	cout << endl;
 
-	std::cout << "Merged Array: ";
+	cout << "Merged Array: ";
 	PrintArray(arrRes, size);
-	std::cout << std::endl;
+	cout << endl;
 #endif
 }
 
@@ -273,7 +317,7 @@ bool CheckIfEven(int a)
 void DivideArray(int arr[], const int size, int arr1[], int size1, int arr2[], int size2)
 {
 #ifdef DEBUG_MODE:
-	std::cout << "Dividing Started" << std::endl << std::endl;
+	cout << "Dividing Started" << endl << endl;
 #endif
 
 	int i, j, k;
@@ -290,13 +334,13 @@ void DivideArray(int arr[], const int size, int arr1[], int size1, int arr2[], i
 	}
 
 #ifdef DEBUG_MODE
-	std::cout << "First Part: ";
+	cout << "First Part: ";
 	PrintArray(arr1, size / 2);
-	std::cout << std::endl;
+	cout << endl;
 
-	std::cout << "Second Part: ";
+	cout << "Second Part: ";
 	PrintArray(arr2, size / 2);
-	std::cout << std::endl;
+	cout << endl;
 #endif
 }
 
@@ -328,10 +372,10 @@ void PrintArray(const int arr[], const int size)
 {
 	for (int i = 0; i < size; i++)
 	{
-		std::cout << "\t" << arr[i];
+		cout << "\t" << arr[i];
 	}
 
-	std::cout << std::endl;
+	cout << endl;
 }
 
 //	Fills the array with pseudo-random values, [0, 10] range
